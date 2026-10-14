@@ -7,9 +7,9 @@ GANTI FOTO: cukup upload file baru dengan NAMA YANG SAMA ke folder images/
 -->
 
 <head>
-<meta name="google-site-verification" content="ELunGLliicEg9ooDGysV6HmoDeQGAVM48I8L_WfxFxA" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="PT. Berkah Madani Husada, distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya di Jember, Jawa Timur.">
 <link rel="icon" href="images/logo.png">
 <title>PT. Berkah Madani Husada | Distributor Alat Kesehatan</title>
 <style>
@@ -68,6 +68,18 @@ p{margin:0 0 12px}.mut{color:var(--mut)}
 .ct a{color:var(--pri);text-decoration:none}
 footer{background:var(--navy);color:#b9c8da;padding:26px 0;text-align:center;font-size:13px}
 footer .logo{width:44px;height:44px;margin:0 auto 8px}
+.news{display:grid;gap:16px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.nc{border:1px solid var(--bd);border-radius:8px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.nc img{width:100%;height:150px;object-fit:cover;display:block;background:var(--alt)}
+.nc .b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.nc .m{font-size:12px;color:var(--mut);display:flex;gap:8px;align-items:center}
+.nc .t{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+.nc h3{margin:0;font-size:16px;color:var(--pri);line-height:1.35}
+.nc p{margin:0;font-size:14.5px;color:var(--mut)}
+.nc a.more{font-size:13px;color:var(--pri);text-decoration:none;font-weight:600;margin-top:auto}
+.upd{display:inline-block;font-size:12px;border:1px solid var(--bd);border-radius:999px;padding:2px 12px;color:var(--mut);margin-left:8px;vertical-align:middle;letter-spacing:0;text-transform:none;font-weight:600}
+.gal .wa{display:block;font-size:12.5px;font-weight:600;text-align:center;text-decoration:none;color:var(--acc);padding:8px 10px;border-top:1px solid var(--bd)}
+.gal .wa:hover{background:var(--alt)}
 @media(max-width:760px){.two{grid-template-columns:1fr}.hero{padding:64px 0 56px}.btn.o{margin:8px 0 0}}
 </style>
 </head>
@@ -89,7 +101,7 @@ footer .logo{width:44px;height:44px;margin:0 auto 8px}
 
 <header><div class="w">
 <a class="br" href="#top"><span class="logo"></span><span>PT. Berkah Madani Husada</span></a>
-<nav><a href="#tentang">Tentang</a><a href="#visi">Visi &amp; Misi</a><a href="#layanan">Layanan</a><a href="#jangkauan">Jangkauan</a><a href="#katalog">Katalog</a><a href="#purna-jual">Purna Jual</a><a href="#legalitas">Legalitas</a><a href="#kontak">Kontak</a></nav>
+<nav><a href="#tentang">Tentang</a><a href="#visi">Visi &amp; Misi</a><a href="#layanan">Layanan</a><a href="#kabar">Kabar</a><a href="#jangkauan">Jangkauan</a><a href="#katalog">Katalog</a><a href="#purna-jual">Purna Jual</a><a href="#legalitas">Legalitas</a><a href="#kontak">Kontak</a></nav>
 </div></header>
 
 <div class="hero" id="top"><div class="w">
@@ -128,6 +140,11 @@ footer .logo{width:44px;height:44px;margin:0 auto 8px}
 </div>
 </div></section>
 
+<section id="kabar"><div class="w">
+<span class="k">Kabar Kegiatan</span><h2>Aktivitas &amp; Informasi Terbaru <span class="upd" id="kabar-upd" hidden></span></h2>
+<div class="news" id="kabar-list"><p class="mut">Kabar kegiatan akan segera hadir.</p></div>
+</div></section>
+
 <section id="jangkauan" class="alt"><div class="w">
 <span class="k">Populasi Produk &amp; Jasa</span><h2>Jangkauan Layanan</h2>
 <p class="mut">Produk dan jasa kami telah digunakan di berbagai rumah sakit di wilayah Jawa Timur, di antaranya:</p>
@@ -136,13 +153,8 @@ footer .logo{width:44px;height:44px;margin:0 auto 8px}
 
 <section id="katalog"><div class="w">
 <span class="k">Katalog Produk</span><h2>Sekilas Peralatan Kami</h2>
-<div class="gal">
-    <img loading="lazy" src="images/or.jpg" alt="Kamar Operasi">
-    <img loading="lazy" src="images/esu.jpg" alt="Unit Elektrosurgikal">
-    <img loading="lazy" src="images/pend.jpg" alt="Peralatan Ruang Tindakan">
-    <img loading="lazy" src="images/set.jpg" alt="Perlengkapan Medis Sekali Pakai">
-    <img loading="lazy" src="images/cath.jpg" alt="Kateter Medis">
-</div>
+<p class="mut">Klik tombol di bawah foto untuk menanyakan produk atau meminta penawaran lewat WhatsApp.</p>
+<div class="gal"><figure><img loading="lazy" src="images/or.jpg" alt="Kamar Operasi"><figcaption>Kamar Operasi</figcaption><a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Kamar%20Operasi." target="_blank" rel="noopener">Tanya via WhatsApp</a></figure><figure><img loading="lazy" src="images/esu.jpg" alt="Unit Elektrosurgikal"><figcaption>Unit Elektrosurgikal</figcaption><a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Unit%20Elektrosurgikal." target="_blank" rel="noopener">Tanya via WhatsApp</a></figure><figure><img loading="lazy" src="images/pend.jpg" alt="Peralatan Ruang Tindakan"><figcaption>Peralatan Ruang Tindakan</figcaption><a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Peralatan%20Ruang%20Tindakan." target="_blank" rel="noopener">Tanya via WhatsApp</a></figure><figure><img loading="lazy" src="images/set.jpg" alt="Perlengkapan Medis Sekali Pakai"><figcaption>Perlengkapan Medis Sekali Pakai</figcaption><a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Perlengkapan%20Medis%20Sekali%20Pakai." target="_blank" rel="noopener">Tanya via WhatsApp</a></figure><figure><img loading="lazy" src="images/cath.jpg" alt="Kateter Medis"><figcaption>Kateter Medis</figcaption><a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Kateter%20Medis." target="_blank" rel="noopener">Tanya via WhatsApp</a></figure></div>
 </div></section>
 
 <section id="purna-jual" class="alt"><div class="w">
@@ -175,9 +187,32 @@ footer .logo{width:44px;height:44px;margin:0 auto 8px}
 <div class="c"><svg class="i"><use href="#tel"/></svg><h3>Telepon</h3><p><a href="tel:+6282233795575">0822 3379 5575</a><br><a href="tel:+6281233175859">0812 3317 5859</a></p></div>
 <div class="c"><svg class="i"><use href="#mail"/></svg><h3>Email</h3><p><a href="mailto:berkahmadanihusada@gmail.com">berkahmadanihusada@gmail.com</a></p></div>
 </div>
-<p style="margin-top:20px"><a class="btn" href="https://wa.me/+6281233175859">Chat WhatsApp</a></p>
+<p style="margin-top:20px"><a class="btn" href="https://wa.me/6282233795575">Chat WhatsApp</a></p>
 </div></section>
 
 <footer><div class="w"><div class="logo"></div>&copy; 2026 PT. Berkah Madani Husada &middot; Distributor Alat Kesehatan</div></footer>
+<script src="kabar.js"></script>
+<script>
+(function(){
+var BLN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+function tgl(t){var p=t.split('-');return parseInt(p[2],10)+' '+BLN[parseInt(p[1],10)-1]+' '+p[0]}
+var box=document.getElementById('kabar-list');
+if(!box||!window.KABAR||!KABAR.length)return;
+var data=KABAR.slice().sort(function(a,b){return a.tanggal<b.tanggal?1:-1}).slice(0,6);
+box.innerHTML='';
+data.forEach(function(k){
+var c=document.createElement('article');c.className='nc';
+if(k.foto){var i=document.createElement('img');i.src=k.foto;i.alt=k.judul;i.loading='lazy';c.appendChild(i)}
+var b=document.createElement('div');b.className='b';
+var m=document.createElement('div');m.className='m';
+if(k.kategori){var t=document.createElement('span');t.className='t';t.textContent=k.kategori;m.appendChild(t)}
+var d=document.createElement('span');d.textContent=tgl(k.tanggal);m.appendChild(d);b.appendChild(m);
+var h=document.createElement('h3');h.textContent=k.judul;b.appendChild(h);
+var p=document.createElement('p');p.textContent=k.isi;b.appendChild(p);
+if(k.tautan){var a=document.createElement('a');a.className='more';a.href=k.tautan;a.target='_blank';a.rel='noopener';a.textContent='Selengkapnya';b.appendChild(a)}
+c.appendChild(b);box.appendChild(c)});
+var u=document.getElementById('kabar-upd');if(u){u.textContent='Diperbarui '+tgl(data[0].tanggal);u.hidden=false}
+})();
+</script>
 </body>
 </html>
