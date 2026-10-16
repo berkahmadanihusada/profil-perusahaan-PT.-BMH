@@ -9,7 +9,7 @@
   Contoh isi:
   window.KABAR_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-xxxx/pub?output=csv";
 */
-window.KABAR_SHEET_URL = "";
+window.KABAR_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMfGv9rEPq33BbeqQLFIUGaIj-WtQ5PWU5heEmTjKqcvrwdHFgKTMnVd5s1Mb77J8yIttkkxGmBWmR/pub?gid=378985071&single=true&output=csv";
 
 /*
   ============================================================
