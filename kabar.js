@@ -1,26 +1,23 @@
 /*
   ============================================================
-  CARA MENAMBAH KABAR KEGIATAN BARU
+  PENGATURAN KABAR KEGIATAN
   ============================================================
-  1. Upload foto kegiatan ke folder images/ (contoh: images/pengiriman-oktober.jpg)
-  2. Salin salah satu blok { ... } di bawah, tempel PALING ATAS di dalam tanda [ ],
-     lalu ubah isinya. Jangan lupa koma (,) setelah tanda } kalau masih ada blok di bawahnya.
-  3. Klik "Commit changes". Web akan ter-update dalam beberapa menit.
+  Kabar kegiatan DIAMBIL OTOMATIS dari Google Sheet.
+  Tempel link "Publish to web" (format CSV) dari Google Sheet di antara tanda kutip di bawah.
+  Cukup dilakukan SEKALI. Setelah itu staf hanya mengisi Google Sheet, tanpa menyentuh file ini.
 
-  Isian:
-    tanggal  : format TAHUN-BULAN-TANGGAL, contoh "2026-10-20"
-    kategori : bebas, contoh "Pengiriman", "Pelatihan", "Purna Jual", "Info"
-    judul    : judul singkat
-    isi      : 2-3 kalimat
-    foto     : alamat foto, contoh "images/pengiriman-oktober.jpg" (boleh dikosongkan: "")
-    tautan   : link ke postingan Instagram/Facebook (boleh dikosongkan: "")
+  Contoh isi:
+  window.KABAR_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-xxxx/pub?output=csv";
+*/
+window.KABAR_SHEET_URL = "";
 
-  Yang tampil di web: 6 kabar dengan tanggal terbaru.
-
-  PENTING sebelum memposting kegiatan:
-  - Minta izin dulu kalau menyebut nama atau memajang foto rumah sakit/pelanggan.
-  - Jangan pasang foto yang jelas menampilkan wajah orang tanpa persetujuan,
-    dan jangan pernah menampilkan data pasien.
+/*
+  ============================================================
+  DATA CADANGAN
+  ============================================================
+  Daftar di bawah HANYA tampil kalau link Google Sheet di atas kosong atau gagal dibaca.
+  Boleh dibiarkan apa adanya.
+  Format tanggal: TAHUN-BULAN-TANGGAL (contoh "2026-10-20").
   ============================================================
 */
 window.KABAR = [
