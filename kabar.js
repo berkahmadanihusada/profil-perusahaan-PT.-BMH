@@ -20,7 +20,7 @@ window.KABAR_SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRMfGv
   Format tanggal: TAHUN-BULAN-TANGGAL (contoh "2026-10-20").
   ============================================================
 */
-window.KABAR = [
+/*window.KABAR = [
   {
     tanggal: "2026-10-14",
     kategori: "Purna Jual",
@@ -45,4 +45,4 @@ window.KABAR = [
     foto: "images/esu.jpg",
     tautan: ""
   }
-];
+];*/
