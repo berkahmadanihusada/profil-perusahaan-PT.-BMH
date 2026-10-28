@@ -25,13 +25,70 @@
   JANGAN menaruh data stok, harga, atau angka internal lain di file ini (file ini terbuka untuk umum).
   ============================================================
 */
+
 window.KATALOG = [
-  { nama: "Produk Hemodialisis", en: "Hemodialysis Products", ket: "Kateter Short Term & Long Term", varian: true, ikon: "ic-drop", foto: "" },
-  { nama: "Kateter Vena Sentral (CVC)", en: "Central Venous Catheters", ket: "Double lumen & triple lumen", varian: true, ikon: "hrt", foto: "" },
-  { nama: "Bedah Vaskular", en: "Vascular Surgery", ket: "", varian: true, ikon: "ic-pulse", foto: "" },
-  { nama: "Bedah Toraks", en: "Thoracic Surgery", ket: "", varian: true, ikon: "ic-wind", foto: "" },
-  { nama: "Urologi", en: "Urology", ket: "", varian: true, ikon: "ic-flask", foto: "" },
-  { nama: "Gastroenterologi", en: "Gastroenterology", ket: "", varian: false, ikon: "ic-search", foto: "" },
-  { nama: "Intervensi & Drainase", en: "Interventional & Drainage", ket: "", varian: false, ikon: "syr", foto: "" },
-  { nama: "Produk Habis Pakai & Penunjang", en: "Consumables & Support Products", ket: "", varian: true, ikon: "ic-box", foto: "" }
+  {
+    nama: "Produk Hemodialisis",
+    en: "Hemodialysis Products",
+    ket: "Kateter Short Term & Long Term",
+    varian: true,
+    ikon: "ic-drop",
+    foto: "HCk Set.jpg"
+  },
+  {
+    nama: "Kateter Vena Sentral (CVC)",
+    en: "Central Venous Catheters",
+    ket: "Double lumen & triple lumen",
+    varian: true,
+    ikon: "hrt",
+    foto: "CVC.jpg"
+  },
+  {
+    nama: "Bedah Vaskular",
+    en: "Vascular Surgery",
+    ket: "",
+    varian: true,
+    ikon: "ic-pulse",
+    foto: "VascSurg.jpg"
+  },
+  {
+    nama: "Bedah Toraks",
+    en: "Thoracic Surgery",
+    ket: "",
+    varian: true,
+    ikon: "ic-wind",
+    foto: "RibFS.jfif"
+  },
+  {
+    nama: "Urologi",
+    en: "Urology",
+    ket: "",
+    varian: true,
+    ikon: "ic-flask",
+    foto: "urolcuttingloop.jpg"
+  },
+  {
+    nama: "Gastroenterologi",
+    en: "Gastroenterology",
+    ket: "",
+    varian: false,
+    ikon: "ic-search",
+    foto: "sache knife.png"
+  },
+  {
+    nama: "Intervensi & Drainase",
+    en: "Interventional & Drainage",
+    ket: "",
+    varian: false,
+    ikon: "syr",
+    foto: "pigtaildrain.jpg"
+  },
+  {
+    nama: "Produk Habis Pakai & Penunjang",
+    en: "Consumables & Support Products",
+    ket: "",
+    varian: true,
+    ikon: "ic-box",
+    foto: "citralock.jpg"
+  }
 ];
