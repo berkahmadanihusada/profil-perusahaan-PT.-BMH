@@ -40,7 +40,7 @@ window.KATALOG = [
     en: "Central Venous Catheters",
     ket: "Double lumen & triple lumen",
     varian: true,
-    ikon: "hrt",
+    ikon: "",
     foto: "CVC.jpg"
   },
   {
