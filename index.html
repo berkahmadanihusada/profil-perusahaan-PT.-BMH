@@ -1,695 +1,313 @@
-Tentu, Faqih! Kode ini sepertinya sudah kamu tambahkan fitur baru, yaitu **Meta SEO (untuk link preview jika dibagikan ke WhatsApp/sosmed)**, ikon Instagram, dan **tombol geser (slider/carousel) untuk bagian Kabar Berita**.
-
-Sama seperti sebelumnya, aku sudah merapikan spasi dan lekukannya (*indentasi*). Aku juga menambahkan komentar-komentar (di antara `/* ... */` untuk CSS/JS dan `<!-- ... -->` untuk HTML) agar kamu lebih mudah paham bagian mana untuk fungsi apa saat melakukan *troubleshooting*.
-
-Berikut adalah kode yang sudah dirapikan:
-
-```html
 <!DOCTYPE html>
 <html lang="id">
 <!--
-======================================================
-PETUNJUK CEPAT MENGGANTI FOTO (TROUBLESHOOTING):
-- Cukup upload file baru dengan NAMA YANG SAMA ke folder images/
-  hero.jpg    = latar bagian paling atas 
-  band.jpg    = latar Visi, Misi & Nilai 
-  tentang.jpg = foto Tentang Kami
-  or.jpg, esu.jpg, pend.jpg, set.jpg, cath.jpg = galeri Katalog Produk 
-  logo.png    = logo perusahaan
-======================================================
+GANTI FOTO: cukup upload file baru dengan NAMA YANG SAMA ke folder images/
+ hero.jpg = latar bagian paling atas | band.jpg = latar Visi, Misi & Nilai | tentang.jpg = foto Tentang Kami
+ or.jpg, esu.jpg, pend.jpg, set.jpg, cath.jpg = galeri Katalog Produk | logo.png = logo
 -->
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    
-    <!-- ==========================================
-         BAGIAN SEO & PREVIEW SOSIAL MEDIA (META TAGS)
-         ========================================== -->
-    <meta name="description" content="PT. Berkah Madani Husada, distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya di Jember, Jawa Timur.">
-    <link rel="canonical" href="https://ptbmh.com/">
-    
-    <!-- Open Graph (Untuk preview saat link dibagikan di WA, FB, IG) -->
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="id_ID">
-    <meta property="og:site_name" content="PT. Berkah Madani Husada">
-    <meta property="og:title" content="PT. Berkah Madani Husada | Distributor Alat Kesehatan">
-    <meta property="og:description" content="Distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya di Jember, Jawa Timur.">
-    <meta property="og:url" content="https://ptbmh.com/">
-    <meta property="og:image" content="https://ptbmh.com/images/hero.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <!-- Schema.org JSON-LD (Membantu Google memahami info profil perusahaan) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "PT. Berkah Madani Husada",
-        "description": "Distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya di Jember, Jawa Timur.",
-        "url": "https://ptbmh.com/",
-        "logo": "https://ptbmh.com/images/logo.png",
-        "image": "https://ptbmh.com/images/hero.jpg",
-        "telephone": "+6282233795575",
-        "email": "berkahmadanihusada@gmail.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Jl. Slamet Riyadi No.183",
-            "addressLocality": "Jember",
-            "addressRegion": "Jawa Timur",
-            "addressCountry": "ID"
-        },
-        "sameAs": ["https://www.instagram.com/pt_berkahmadanihusada/"]
-    }
-    </script>
-    
-    <!-- Ikon Website (Favicon) di tab browser -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
-    <title>PT. Berkah Madani Husada | Distributor Alat Kesehatan</title>
-    
-    <!-- ==========================================
-         PENGATURAN DESAIN (CSS)
-         ========================================== -->
-    <style>
-        /* 1. VARIABEL WARNA & GAMBAR DASAR */
-        :root {
-            --logo: url(images/logo.png);
-            --hero: url(images/hero.jpg);
-            --biz: url(images/band.jpg);
-            --bg: #fff;
-            --alt: #f3f6fa;
-            --tx: #1c2b3d;
-            --mut: #5d6c7e;
-            --pri: #164a7c;
-            --acc: #1b8a9a;
-            --bd: #dde4ec;
-            --navy: #0e2a47;
-            box-sizing: border-box;
-            padding-top: env(safe-area-inset-top, 0px);
-            padding-bottom: env(safe-area-inset-bottom, 0px);
-        }
-
-        /* 2. MODE GELAP (DARK MODE) OTOMATIS */
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --bg: #0f1b2b; --alt: #13233a; --tx: #e6edf5; --mut: #9fb1c6; --pri: #6db0e8; --acc: #4fc0cf; --bd: #26384f; --navy: #08121f;
-            }
-        }
-        :root[data-theme="dark"] {
-            --bg: #0f1b2b; --alt: #13233a; --tx: #e6edf5; --mut: #9fb1c6; --pri: #6db0e8; --acc: #4fc0cf; --bd: #26384f; --navy: #08121f;
-        }
-
-        /* 3. PENGATURAN UMUM HALAMAN */
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: calc(64px + env(safe-area-inset-top, 0px)); }
-        body { margin: 0; background: var(--bg); color: var(--tx); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.7; font-size: 16px; }
-        
-        /* Layout Pembungkus & Ikon */
-        .i { width: 1em; height: 1em; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-        .w { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
-        .logo { background: var(--logo) center/contain no-repeat; }
-        
-        /* 4. HEADER & NAVIGASI MENU */
-        header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); border-bottom: 1px solid var(--bd); }
-        header .w { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 14px; }
-        .br { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; text-decoration: none; color: var(--tx); }
-        .br .logo { width: 34px; height: 34px; }
-        nav { display: flex; gap: 16px; overflow-x: auto; }
-        nav a { font-size: 13px; color: var(--mut); text-decoration: none; white-space: nowrap; }
-        nav a:hover { color: var(--pri); }
-        
-        /* 5. BAGIAN HERO (ATAS / BERANDA) */
-        .hero { background: linear-gradient(rgba(14, 42, 71, .82), rgba(14, 42, 71, .88)), var(--hero) center/cover; color: #fff; padding: 96px 0 88px; }
-        .hero small { letter-spacing: .14em; text-transform: uppercase; font-size: 12px; opacity: .85; }
-        .hero h1 { font-size: clamp(28px, 4.5vw, 42px); margin: 10px 0 12px; line-height: 1.2; font-weight: 700; }
-        .hero p { max-width: 560px; margin: 0 0 24px; opacity: .92; }
-        
-        /* Desain Tombol */
-        .btn { display: inline-block; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 6px; text-decoration: none; background: var(--acc); color: #fff; border: 1px solid var(--acc); }
-        .btn.o { background: transparent; border-color: rgba(255, 255, 255, .6); margin-left: 8px; }
-        .btn.ghost { background: transparent; color: var(--pri); border-color: var(--pri); margin-left: 8px; }
-        
-        /* 6. PENGATURAN SECTION & GRID */
-        section { padding: 60px 0; }
-        .alt { background: var(--alt); }
-        .k { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); font-weight: 700; }
-        h2 { font-size: 26px; margin: 4px 0 14px; line-height: 1.25; color: var(--pri); }
-        p { margin: 0 0 12px; }
-        .mut { color: var(--mut); }
-        
-        .two { display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; align-items: center; }
-        .ph { width: 100%; border-radius: 8px; display: block; box-shadow: 0 6px 20px rgba(14, 42, 71, .15); }
-        .g { display: grid; gap: 16px; margin-top: 22px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-        
-        /* Kotak-kotak Layanan/Info (Cards) */
-        .c { background: var(--bg); border: 1px solid var(--bd); border-radius: 8px; padding: 20px; }
-        .alt .c { background: var(--bg); }
-        .c .i { font-size: 24px; color: var(--acc); margin-bottom: 8px; }
-        .c h3 { margin: 0 0 4px; font-size: 16px; color: var(--pri); }
-        .c p { margin: 0; font-size: 14.5px; color: var(--mut); }
-        
-        /* 7. BAGIAN VISI MISI (Background Gambar) */
-        .band { background: linear-gradient(rgba(14, 42, 71, .88), rgba(14, 42, 71, .92)), var(--biz) center/cover; color: #fff; }
-        .band h2, .band .k { color: #fff; }
-        .band .k { color: #8fd8e3; }
-        .vm { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 20px; }
-        .vm div { border: 1px solid rgba(255, 255, 255, .25); border-radius: 8px; padding: 20px; background: rgba(255, 255, 255, .06); }
-        .vm h3 { margin: 0 0 6px; font-size: 16px; color: #8fd8e3; }
-        .vm p { margin: 0; font-size: 15px; opacity: .95; }
-        
-        /* Label Visi Misi (Chips) */
-        .nil { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-        .nil span { border: 1px solid rgba(255, 255, 255, .35); padding: 5px 14px; border-radius: 999px; font-size: 14px; }
-        
-        /* Label Wilayah Jangkauan */
-        .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-        .chips span { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--bd); background: var(--bg); padding: 5px 14px; border-radius: 999px; font-size: 14px; }
-        .chips .i { color: var(--acc); }
-        
-        /* 8. GALERI KATALOG PRODUK */
-        .gal { display: grid; gap: 14px; margin-top: 22px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-        .gal figure { margin: 0; border: 1px solid var(--bd); border-radius: 8px; overflow: hidden; background: #fff; }
-        .gal img { width: 100%; height: 150px; object-fit: contain; display: block; padding: 6px; }
-        .gal figcaption { padding: 8px 12px; font-size: 13.5px; border-top: 1px solid var(--bd); background: var(--bg); color: var(--tx); }
-        .gal .wa { display: block; font-size: 12.5px; font-weight: 600; text-align: center; text-decoration: none; color: var(--acc); padding: 8px 10px; border-top: 1px solid var(--bd); }
-        .gal .wa:hover { background: var(--alt); }
-        
-        /* 9. LIST IKON (Purna Jual & Legalitas) */
-        .ls { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-        .ls li { display: flex; gap: 10px; align-items: center; padding: 10px 14px; border: 1px solid var(--bd); border-radius: 8px; background: var(--bg); font-size: 15px; }
-        .ls .i { color: var(--acc); font-size: 20px; }
-        .ct { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top: 20px; }
-        .ct a { color: var(--pri); text-decoration: none; }
-        
-        /* 10. KABAR BERITA (CAROUSEL / SLIDER HORIZONTAL) */
-        .nwrap { position: relative; margin-top: 22px; }
-        /* Container slider yang bisa digeser (scroll) ke samping */
-        .news { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 12px; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
-        .news .nc { flex: 0 0 220px; scroll-snap-align: start; }
-        
-        /* Tombol panah Kiri/Kanan slider */
-        .nbtn { position: absolute; top: 38%; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--bd); background: var(--bg); color: var(--pri); font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 2px 8px rgba(14, 42, 71, .2); z-index: 2; padding: 0; }
-        .nbtn.prev { left: -14px; }
-        .nbtn.next { right: -14px; }
-        .nbtn:hover { background: var(--alt); }
-        
-        /* Desain Kotak Berita */
-        .nc { border: 1px solid var(--bd); border-radius: 8px; overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
-        .nc img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center 25%; display: block; background: var(--alt); }
-        .nc .b { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-        .nc .m { font-size: 12px; color: var(--mut); display: flex; gap: 8px; align-items: center; }
-        .nc .t { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--acc); }
-        .nc h3 { margin: 0; font-size: 15px; color: var(--pri); line-height: 1.35; }
-        .nc p { margin: 0; font-size: 13.5px; color: var(--mut); display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
-        .nc a.more { font-size: 13px; color: var(--pri); text-decoration: none; font-weight: 600; margin-top: auto; }
-        
-        /* Badge Update (Diperbarui...) */
-        .upd { display: inline-block; font-size: 12px; border: 1px solid var(--bd); border-radius: 999px; padding: 2px 12px; color: var(--mut); margin-left: 8px; vertical-align: middle; letter-spacing: 0; text-transform: none; font-weight: 600; }
-        
-        /* 11. FOOTER (PALING BAWAH) */
-        footer a { color: #fff; }
-        footer { background: var(--navy); color: #b9c8da; padding: 26px 0; text-align: center; font-size: 13px; }
-        footer .logo { width: 44px; height: 44px; margin: 0 auto 8px; }
-        
-        /* 12. MODE RESPONSIVE (Tampilan HP) */
-        @media(max-width: 760px) {
-            .nbtn { display: none; } /* Sembunyikan tombol panah di HP, user bisa swipe manual */
-            .news .nc { flex-basis: 170px; }
-            .two { grid-template-columns: 1fr; }
-            .hero { padding: 64px 0 56px; }
-            .btn.o { margin: 8px 0 0; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="PT. Berkah Madani Husada, distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya di Jember, Jawa Timur.">
+<link rel="canonical" href="https://ptbmh.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="PT. Berkah Madani Husada">
+<meta property="og:title" content="PT. Berkah Madani Husada | Distributor Alat Kesehatan">
+<meta property="og:description" content="Distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya di Jember, Jawa Timur.">
+<meta property="og:url" content="https://ptbmh.com/">
+<meta property="og:image" content="https://ptbmh.com/images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "PT. Berkah Madani Husada", "description": "Distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya di Jember, Jawa Timur.", "url": "https://ptbmh.com/", "logo": "https://ptbmh.com/images/logo.png", "image": "https://ptbmh.com/images/hero.jpg", "telephone": "+6282233795575", "email": "berkahmadanihusada@gmail.com", "address": {"@type": "PostalAddress", "streetAddress": "Jl. Slamet Riyadi No.183", "addressLocality": "Jember", "addressRegion": "Jawa Timur", "addressCountry": "ID"}, "sameAs": ["https://www.instagram.com/pt_berkahmadanihusada/"]}</script>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>PT. Berkah Madani Husada | Distributor Alat Kesehatan</title>
+<style>
+:root{--logo:url(images/logo.png);--hero:url(images/hero.jpg);--biz:url(images/band.jpg);--bg:#fff;--alt:#f3f6fa;--tx:#1c2b3d;--mut:#5d6c7e;--pri:#164a7c;--acc:#1b8a9a;--bd:#dde4ec;--navy:#0e2a47;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b2b;--alt:#13233a;--tx:#e6edf5;--mut:#9fb1c6;--pri:#6db0e8;--acc:#4fc0cf;--bd:#26384f;--navy:#08121f}}
+:root[data-theme="dark"]{--bg:#0f1b2b;--alt:#13233a;--tx:#e6edf5;--mut:#9fb1c6;--pri:#6db0e8;--acc:#4fc0cf;--bd:#26384f;--navy:#08121f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.7;font-size:16px}
+.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+.logo{background:var(--logo) center/contain no-repeat}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--bd)}
+header .w{display:flex;align-items:center;justify-content:space-between;height:60px;gap:14px}
+.br{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;text-decoration:none;color:var(--tx)}
+.br .logo{width:34px;height:34px}
+nav{display:flex;gap:16px;overflow-x:auto}
+nav a{font-size:13px;color:var(--mut);text-decoration:none;white-space:nowrap}
+nav a:hover{color:var(--pri)}
+.hero{background:linear-gradient(rgba(14,42,71,.82),rgba(14,42,71,.88)),var(--hero) center/cover;color:#fff;padding:96px 0 88px}
+.hero small{letter-spacing:.14em;text-transform:uppercase;font-size:12px;opacity:.85}
+.hero h1{font-size:clamp(28px,4.5vw,42px);margin:10px 0 12px;line-height:1.2;font-weight:700}
+.hero p{max-width:560px;margin:0 0 24px;opacity:.92}
+.btn{display:inline-block;font-size:13px;font-weight:600;padding:8px 18px;border-radius:6px;text-decoration:none;background:var(--acc);color:#fff;border:1px solid var(--acc)}
+.btn.o{background:transparent;border-color:rgba(255,255,255,.6);margin-left:8px}
+section{padding:60px 0}
+.alt{background:var(--alt)}
+.k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h2{font-size:26px;margin:4px 0 14px;line-height:1.25;color:var(--pri)}
+p{margin:0 0 12px}.mut{color:var(--mut)}
+.two{display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center}
+.ph{width:100%;border-radius:8px;display:block;box-shadow:0 6px 20px rgba(14,42,71,.15)}
+.g{display:grid;gap:16px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.c{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:20px}
+.alt .c{background:var(--bg)}
+.c .i{font-size:24px;color:var(--acc);margin-bottom:8px}
+.c h3{margin:0 0 4px;font-size:16px;color:var(--pri)}.c p{margin:0;font-size:14.5px;color:var(--mut)}
+.band{background:linear-gradient(rgba(14,42,71,.88),rgba(14,42,71,.92)),var(--biz) center/cover;color:#fff}
+.band h2,.band .k{color:#fff}.band .k{color:#8fd8e3}
+.vm{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:20px}
+.vm div{border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:20px;background:rgba(255,255,255,.06)}
+.vm h3{margin:0 0 6px;font-size:16px;color:#8fd8e3}.vm p{margin:0;font-size:15px;opacity:.95}
+.nil{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.nil span{border:1px solid rgba(255,255,255,.35);padding:5px 14px;border-radius:999px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chips span{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--bd);background:var(--bg);padding:5px 14px;border-radius:999px;font-size:14px}
+.chips .i{color:var(--acc)}
+.gal{display:grid;gap:14px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.gal figure{margin:0;border:1px solid var(--bd);border-radius:8px;overflow:hidden;background:#fff}
+.gal img{width:100%;height:150px;object-fit:contain;display:block;padding:6px}
+.gal figcaption{padding:8px 12px;font-size:13.5px;border-top:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+.ls{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.ls li{display:flex;gap:10px;align-items:center;padding:10px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);font-size:15px}
+.ls .i{color:var(--acc);font-size:20px}
+.ct{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:20px}
+.ct a{color:var(--pri);text-decoration:none}
+.btn.ghost{background:transparent;color:var(--pri);border-color:var(--pri);margin-left:8px}
+footer a{color:#fff}
+footer{background:var(--navy);color:#b9c8da;padding:26px 0;text-align:center;font-size:13px}
+footer .logo{width:44px;height:44px;margin:0 auto 8px}
+.nwrap{position:relative;margin-top:22px}
+.news{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:12px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.news .nc{flex:0 0 220px;scroll-snap-align:start}
+.nbtn{position:absolute;top:38%;width:34px;height:34px;border-radius:50%;border:1px solid var(--bd);background:var(--bg);color:var(--pri);font-size:20px;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(14,42,71,.2);z-index:2;padding:0}
+.nbtn.prev{left:-14px}.nbtn.next{right:-14px}
+.nbtn:hover{background:var(--alt)}
+.nc{border:1px solid var(--bd);border-radius:8px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.nc img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 25%;display:block;background:var(--alt)}
+.nc .b{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.nc .m{font-size:12px;color:var(--mut);display:flex;gap:8px;align-items:center}
+.nc .t{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}
+.nc h3{margin:0;font-size:15px;color:var(--pri);line-height:1.35}
+.nc p{margin:0;font-size:13.5px;color:var(--mut);display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.nc a.more{font-size:13px;color:var(--pri);text-decoration:none;font-weight:600;margin-top:auto}
+.upd{display:inline-block;font-size:12px;border:1px solid var(--bd);border-radius:999px;padding:2px 12px;color:var(--mut);margin-left:8px;vertical-align:middle;letter-spacing:0;text-transform:none;font-weight:600}
+.gal .wa{display:block;font-size:12.5px;font-weight:600;text-align:center;text-decoration:none;color:var(--acc);padding:8px 10px;border-top:1px solid var(--bd)}
+.gal .wa:hover{background:var(--alt)}
+.cat{display:grid;gap:16px;margin-top:22px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.pc{border:1px solid var(--bd);border-radius:8px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.pc .pic{height:150px;display:grid;place-items:center;background:var(--alt);color:var(--acc);font-size:52px}
+.pc .pic img{width:100%;height:100%;object-fit:contain;background:#fff;padding:8px}
+.pc .pb{padding:14px 16px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.pc h3{margin:0;font-size:16px;color:var(--pri);line-height:1.3}
+.pc .en{font-size:12.5px;color:var(--mut)}
+.pc .ket{font-size:13.5px}
+.pc .tag{align-self:flex-start;font-size:11.5px;font-weight:700;border:1px solid var(--bd);border-radius:999px;padding:1px 10px;color:var(--acc);margin-top:4px}
+.pc .act{display:flex;border-top:1px solid var(--bd);margin-top:auto}
+.pc .act a{flex:1;text-align:center;font-size:12.5px;font-weight:600;text-decoration:none;color:var(--acc);padding:9px 6px}
+.pc .act a+a{border-left:1px solid var(--bd)}
+.pc .act a:hover{background:var(--alt)}
+@media(max-width:760px){.nbtn{display:none}.news .nc{flex-basis:170px}.two{grid-template-columns:1fr}.hero{padding:64px 0 56px}.btn.o{margin:8px 0 0}}
+</style>
 </head>
-
 <body>
-    <!-- ==========================================
-         KUMPULAN IKON SVG (Disembunyikan, dipanggil di bawah)
-         ========================================== -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-        <symbol id="hosp" viewBox="0 0 24 24"><path d="M12 6v4M14 8h-4M14 14h-4M14 18h-4M18 12h2a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-9a2 2 0 012-2h2M18 22V4a2 2 0 00-2-2H8a2 2 0 00-2 2v18"/></symbol>
-        <symbol id="syr" viewBox="0 0 24 24"><path d="M18 2l4 4M17 7l3-3M19 9L8.5 19.5a2.12 2.12 0 01-3 0l-1-1a2.12 2.12 0 010-3L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></symbol>
-        <symbol id="ste" viewBox="0 0 24 24"><path d="M6 3v6a4 4 0 008 0V3M10 13v2a5 5 0 0010 0v-2"/><circle cx="20" cy="11" r="2"/></symbol>
-        <symbol id="trk" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 00-2-2H4a2 2 0 00-2 2v11a1 1 0 001 1h2M15 18H9M19 18h2a1 1 0 001-1v-3.65a1 1 0 00-.22-.62l-3.48-4.35A1 1 0 0017.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
-        <symbol id="wr" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94z"/></symbol>
-        <symbol id="cap" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/></symbol>
-        <symbol id="hrt" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></symbol>
-        <symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol>
-        <symbol id="mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></symbol>
-        <symbol id="tel" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></symbol>
-        <symbol id="doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M9 13h6M9 17h6"/></symbol>
-        <!-- Ikon Instagram baru -->
-        <symbol id="ig" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></symbol>
-        <symbol id="shd" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4"/></symbol>
-    </svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="hosp" viewBox="0 0 24 24"><path d="M12 6v4M14 8h-4M14 14h-4M14 18h-4M18 12h2a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-9a2 2 0 012-2h2M18 22V4a2 2 0 00-2-2H8a2 2 0 00-2 2v18"/></symbol>
+<symbol id="syr" viewBox="0 0 24 24"><path d="M18 2l4 4M17 7l3-3M19 9L8.5 19.5a2.12 2.12 0 01-3 0l-1-1a2.12 2.12 0 010-3L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></symbol>
+<symbol id="ste" viewBox="0 0 24 24"><path d="M6 3v6a4 4 0 008 0V3M10 13v2a5 5 0 0010 0v-2"/><circle cx="20" cy="11" r="2"/></symbol>
+<symbol id="trk" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 00-2-2H4a2 2 0 00-2 2v11a1 1 0 001 1h2M15 18H9M19 18h2a1 1 0 001-1v-3.65a1 1 0 00-.22-.62l-3.48-4.35A1 1 0 0017.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+<symbol id="wr" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94z"/></symbol>
+<symbol id="cap" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/></symbol>
+<symbol id="hrt" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></symbol>
+<symbol id="tel" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.8 19.8 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></symbol>
+<symbol id="doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M9 13h6M9 17h6"/></symbol>
+<symbol id="ig" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></symbol>
+<symbol id="ic-drop" viewBox="0 0 24 24"><path d="M12 2.7s7 7.2 7 12a7 7 0 01-14 0c0-4.8 7-12 7-12z"/></symbol>
+<symbol id="ic-pulse" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+<symbol id="ic-wind" viewBox="0 0 24 24"><path d="M9.6 4.6A2 2 0 1111 8H2m10.6 11.4A2 2 0 1014 16H2m15.7-8.3A2.5 2.5 0 1119.5 12H2"/></symbol>
+<symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 001.3 2h12.4a1.5 1.5 0 001.3-2L14 9V3"/></symbol>
+<symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></symbol>
+<symbol id="ic-box" viewBox="0 0 24 24"><path d="M16.5 9.4L7.5 4.2M21 16V8a2 2 0 00-1-1.7l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.7l7 4a2 2 0 002 0l7-4a2 2 0 001-1.7zM3.3 7L12 12l8.7-5M12 22V12"/></symbol>
+<symbol id="shd" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4"/></symbol>
+</svg>
 
-    <!-- ==========================================
-         HEADER / NAVIGASI
-         ========================================== -->
-    <header>
-        <div class="w">
-            <a class="br" href="#top">
-                <span class="logo"></span>
-                <span>PT. Berkah Madani Husada</span>
-            </a>
-            <nav>
-                <a href="#tentang">Tentang</a>
-                <a href="#visi">Visi &amp; Misi</a>
-                <a href="#layanan">Layanan</a>
-                <a href="#kabar">Kabar</a>
-                <a href="#jangkauan">Jangkauan</a>
-                <a href="#katalog">Katalog</a>
-                <a href="#purna-jual">Purna Jual</a>
-                <a href="#legalitas">Legalitas</a>
-                <a href="#kontak">Kontak</a>
-            </nav>
-        </div>
-    </header>
+<header><div class="w">
+<a class="br" href="#top"><span class="logo"></span><span>PT. Berkah Madani Husada</span></a>
+<nav><a href="#tentang">Tentang</a><a href="#visi">Visi &amp; Misi</a><a href="#layanan">Layanan</a><a href="#kabar">Kabar</a><a href="#jangkauan">Jangkauan</a><a href="#katalog">Katalog</a><a href="#purna-jual">Purna Jual</a><a href="#legalitas">Legalitas</a><a href="#kontak">Kontak</a></nav>
+</div></header>
 
-    <!-- ==========================================
-         BERANDA (HERO SECTION)
-         ========================================== -->
-    <div class="hero" id="top">
-        <div class="w">
-            <small>Distributor Alat Kesehatan</small>
-            <h1>PT. Berkah Madani Husada</h1>
-            <p>Distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya, dengan komitmen pada pelayanan terbaik dan kepuasan pelanggan.</p>
-            <a class="btn" href="#kontak">Hubungi Kami</a>
-            <a class="btn o" href="#layanan">Layanan Kami</a>
-        </div>
-    </div>
+<div class="hero" id="top"><div class="w">
+<small>Distributor Alat Kesehatan</small>
+<h1>PT. Berkah Madani Husada</h1>
+<p>Distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya, dengan komitmen pada pelayanan terbaik dan kepuasan pelanggan.</p>
+<a class="btn" href="#kontak">Hubungi Kami</a><a class="btn o" href="#layanan">Layanan Kami</a>
+</div></div>
 
-    <!-- ==========================================
-         TENTANG KAMI
-         ========================================== -->
-    <section id="tentang">
-        <div class="w two">
-            <div>
-                <span class="k">Tentang Kami</span>
-                <h2>Mitra Pengadaan Alat Kesehatan Rumah Sakit</h2>
-                <p><b>PT. Berkah Madani Husada</b> merupakan perusahaan distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya. Kami juga bersedia memberikan layanan jasa yang optimal dalam hal pendistribusian barang kami, spesifikasi, dan anggaran biaya. Selain itu, perusahaan kami memberikan pelatihan terkait pendistribusian barang kami, dengan mengedepankan layanan purna jual (after sale) yang baik dan optimal.</p>
-                <p class="mut">Kami bekerja dengan mengedepankan kebutuhan dan keinginan pelanggan tanpa mengesampingkan kualitas dan standardisasi yang berlaku dalam bidang ahli tersebut.</p>
-            </div>
-            <img class="ph" src="images/tentang.jpg" alt="Kerja sama tim">
-        </div>
-    </section>
+<section id="tentang"><div class="w two">
+<div>
+<span class="k">Tentang Kami</span><h2>Mitra Pengadaan Alat Kesehatan Rumah Sakit</h2>
+<p><b>PT. Berkah Madani Husada</b> merupakan perusahaan distributor alat bedah dan pengembangan rumah sakit, alat kedokteran, dan alat kesehatan lainnya. Kami juga bersedia memberikan layanan jasa yang optimal dalam hal pendistribusian barang kami, spesifikasi, dan anggaran biaya. Selain itu, perusahaan kami memberikan pelatihan terkait pendistribusian barang kami, dengan mengedepankan layanan purna jual (after sale) yang baik dan optimal.</p>
+<p class="mut">Kami bekerja dengan mengedepankan kebutuhan dan keinginan pelanggan tanpa mengesampingkan kualitas dan standardisasi yang berlaku dalam bidang ahli tersebut.</p>
+</div>
+<img class="ph" src="images/tentang.jpg" alt="Kerja sama tim">
+</div></section>
 
-    <!-- ==========================================
-         VISI, MISI & NILAI
-         ========================================== -->
-    <section id="visi" class="band">
-        <div class="w">
-            <span class="k">Visi, Misi &amp; Nilai</span>
-            <h2>Komitmen Kami</h2>
-            <div class="vm">
-                <div>
-                    <h3>Visi Perusahaan</h3>
-                    <p>Berkomitmen memberikan pelayanan yang terbaik dan kepuasan pelanggan yang utama.</p>
-                </div>
-                <div>
-                    <h3>Misi Perusahaan</h3>
-                    <p>Selalu mempertahankan integritas, loyalitas, dan dedikasi yang tinggi terhadap pelanggan, serta memberikan layanan jasa yang prima dengan mengedepankan kepuasan pelanggan, produk yang berkualitas dengan standar yang diakui internasional.</p>
-                </div>
-            </div>
-            <div class="nil">
-                <span>Jujur</span>
-                <span>Bertaqwa</span>
-                <span>Tanggap</span>
-                <span>Gotong Royong</span>
-                <span>Bertanggung Jawab</span>
-            </div>
-        </div>
-    </section>
+<section id="visi" class="band"><div class="w">
+<span class="k">Visi, Misi &amp; Nilai</span><h2>Komitmen Kami</h2>
+<div class="vm">
+<div><h3>Visi Perusahaan</h3><p>Berkomitmen memberikan pelayanan yang terbaik dan kepuasan pelanggan yang utama.</p></div>
+<div><h3>Misi Perusahaan</h3><p>Selalu mempertahankan integritas, loyalitas, dan dedikasi yang tinggi terhadap pelanggan, serta memberikan layanan jasa yang prima dengan mengedepankan kepuasan pelanggan, produk yang berkualitas dengan standar yang diakui internasional.</p></div>
+</div>
+<div class="nil"><span>Jujur</span><span>Bertaqwa</span><span>Tanggap</span><span>Gotong Royong</span><span>Bertanggung Jawab</span></div>
+</div></section>
 
-    <!-- ==========================================
-         BIDANG LAYANAN / JASA
-         ========================================== -->
-    <section id="layanan">
-        <div class="w">
-            <span class="k">Jasa &amp; Kegiatan Perusahaan</span>
-            <h2>Bidang Pengadaan Barang dan Jasa</h2>
-            <p class="mut">Kami bergerak di bidang pengadaan barang dan jasa, meliputi:</p>
-            <div class="g">
-                <div class="c">
-                    <svg class="i"><use href="#trk"/></svg>
-                    <h3>Pendistribusian</h3>
-                    <p>Pendistribusian barang dan jasa alat kesehatan.</p>
-                </div>
-                <div class="c">
-                    <svg class="i"><use href="#syr"/></svg>
-                    <h3>Alat Bedah</h3>
-                    <p>Pengadaan dan pendistribusian alat bedah.</p>
-                </div>
-                <div class="c">
-                    <svg class="i"><use href="#hrt"/></svg>
-                    <h3>Pemerataan</h3>
-                    <p>Pemerataan penggunaan alat kesehatan yang terjangkau dan berkualitas.</p>
-                </div>
-                <div class="c">
-                    <svg class="i"><use href="#ste"/></svg>
-                    <h3>Alat Kedokteran</h3>
-                    <p>Pengadaan alat kesehatan dan kedokteran.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="layanan"><div class="w">
+<span class="k">Jasa &amp; Kegiatan Perusahaan</span><h2>Bidang Pengadaan Barang dan Jasa</h2>
+<p class="mut">Kami bergerak di bidang pengadaan barang dan jasa, meliputi:</p>
+<div class="g">
+<div class="c"><svg class="i"><use href="#trk"/></svg><h3>Pendistribusian</h3><p>Pendistribusian barang dan jasa alat kesehatan.</p></div>
+<div class="c"><svg class="i"><use href="#syr"/></svg><h3>Alat Bedah</h3><p>Pengadaan dan pendistribusian alat bedah.</p></div>
+<div class="c"><svg class="i"><use href="#hrt"/></svg><h3>Pemerataan</h3><p>Pemerataan penggunaan alat kesehatan yang terjangkau dan berkualitas.</p></div>
+<div class="c"><svg class="i"><use href="#ste"/></svg><h3>Alat Kedokteran</h3><p>Pengadaan alat kesehatan dan kedokteran.</p></div>
+</div>
+</div></section>
 
-    <!-- ==========================================
-         KABAR BERITA (DENGAN SLIDER)
-         ========================================== -->
-    <section id="kabar">
-        <div class="w">
-            <span class="k">Kabar Kegiatan</span>
-            <h2>Aktivitas &amp; Informasi Terbaru <span class="upd" id="kabar-upd" hidden></span></h2>
-            
-            <div class="nwrap">
-                <!-- Tombol Prev (Kiri) -->
-                <button class="nbtn prev" id="kabar-prev" aria-label="Kabar sebelumnya" hidden>&#8249;</button>
-                
-                <!-- Kotak Daftar Berita -->
-                <div class="news" id="kabar-list">
-                    <p class="mut">Kabar kegiatan akan segera hadir.</p>
-                </div>
-                
-                <!-- Tombol Next (Kanan) -->
-                <button class="nbtn next" id="kabar-next" aria-label="Kabar berikutnya" hidden>&#8250;</button>
-            </div>
-        </div>
-    </section>
+<section id="kabar"><div class="w">
+<span class="k">Kabar Kegiatan</span><h2>Aktivitas &amp; Informasi Terbaru <span class="upd" id="kabar-upd" hidden></span></h2>
+<div class="nwrap"><button class="nbtn prev" id="kabar-prev" aria-label="Kabar sebelumnya" hidden>&#8249;</button><div class="news" id="kabar-list"><p class="mut">Kabar kegiatan akan segera hadir.</p></div><button class="nbtn next" id="kabar-next" aria-label="Kabar berikutnya" hidden>&#8250;</button></div>
+</div></section>
 
-    <!-- ==========================================
-         JANGKAUAN LAYANAN
-         ========================================== -->
-    <section id="jangkauan" class="alt">
-        <div class="w">
-            <span class="k">Populasi Produk &amp; Jasa</span>
-            <h2>Jangkauan Layanan</h2>
-            <p class="mut">Produk dan jasa kami telah digunakan di berbagai rumah sakit di wilayah Jawa Timur, di antaranya:</p>
-            <div class="chips">
-                <span><svg class="i"><use href="#pin"/></svg>Surabaya</span>
-                <span><svg class="i"><use href="#pin"/></svg>Malang</span>
-                <span><svg class="i"><use href="#pin"/></svg>Blitar</span>
-                <span><svg class="i"><use href="#pin"/></svg>Jember</span>
-                <span><svg class="i"><use href="#pin"/></svg>Bondowoso</span>
-                <span><svg class="i"><use href="#pin"/></svg>Lumajang</span>
-                <span><svg class="i"><use href="#pin"/></svg>Banyuwangi</span>
-            </div>
-        </div>
-    </section>
+<section id="jangkauan" class="alt"><div class="w">
+<span class="k">Populasi Produk &amp; Jasa</span><h2>Jangkauan Layanan</h2>
+<p class="mut">Produk dan jasa kami telah digunakan di berbagai rumah sakit di wilayah Jawa Timur, di antaranya:</p>
+<div class="chips"><span><svg class="i"><use href="#pin"/></svg>Surabaya</span><span><svg class="i"><use href="#pin"/></svg>Malang</span><span><svg class="i"><use href="#pin"/></svg>Blitar</span><span><svg class="i"><use href="#pin"/></svg>Jember</span><span><svg class="i"><use href="#pin"/></svg>Bondowoso</span><span><svg class="i"><use href="#pin"/></svg>Lumajang</span><span><svg class="i"><use href="#pin"/></svg>Banyuwangi</span></div>
+</div></section>
 
-    <!-- ==========================================
-         KATALOG PRODUK
-         ========================================== -->
-    <section id="katalog">
-        <div class="w">
-            <span class="k">Katalog Produk</span>
-            <h2>Sekilas Peralatan Kami</h2>
-            <p class="mut">Klik tombol di bawah foto untuk menanyakan produk atau meminta penawaran lewat WhatsApp.</p>
-            <div class="gal">
-                <figure>
-                    <img loading="lazy" src="images/or.jpg" alt="Kamar Operasi">
-                    <figcaption>Kamar Operasi</figcaption>
-                    <a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Kamar%20Operasi." target="_blank" rel="noopener">Tanya via WhatsApp</a>
-                </figure>
-                <figure>
-                    <img loading="lazy" src="images/esu.jpg" alt="Unit Elektrosurgikal">
-                    <figcaption>Unit Elektrosurgikal</figcaption>
-                    <a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Unit%20Elektrosurgikal." target="_blank" rel="noopener">Tanya via WhatsApp</a>
-                </figure>
-                <figure>
-                    <img loading="lazy" src="images/pend.jpg" alt="Peralatan Ruang Tindakan">
-                    <figcaption>Peralatan Ruang Tindakan</figcaption>
-                    <a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Peralatan%20Ruang%20Tindakan." target="_blank" rel="noopener">Tanya via WhatsApp</a>
-                </figure>
-                <figure>
-                    <img loading="lazy" src="images/set.jpg" alt="Perlengkapan Medis Sekali Pakai">
-                    <figcaption>Perlengkapan Medis Sekali Pakai</figcaption>
-                    <a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Perlengkapan%20Medis%20Sekali%20Pakai." target="_blank" rel="noopener">Tanya via WhatsApp</a>
-                </figure>
-                <figure>
-                    <img loading="lazy" src="images/cath.jpg" alt="Kateter Medis">
-                    <figcaption>Kateter Medis</figcaption>
-                    <a class="wa" href="https://wa.me/6282233795575?text=Halo%20PT.%20Berkah%20Madani%20Husada%2C%20saya%20ingin%20menanyakan%20informasi%20dan%20penawaran%20untuk%3A%20Kateter%20Medis." target="_blank" rel="noopener">Tanya via WhatsApp</a>
-                </figure>
-            </div>
-        </div>
-    </section>
+<section id="katalog"><div class="w">
+<span class="k">Katalog Produk</span><h2>Kelompok Produk Kami</h2>
+<p class="mut" style="max-width:700px">Produk kami dikelompokkan per jenis. Untuk informasi varian, ketersediaan, dan penawaran, silakan tanya langsung lewat WhatsApp atau Instagram.</p>
+<div class="cat" id="katalog-list"><noscript><p>Hemodialisis, Kateter Vena Sentral (CVC), Bedah Vaskular, Bedah Toraks, Urologi, Gastroenterologi, Intervensi &amp; Drainase, serta Produk Habis Pakai &amp; Penunjang.</p></noscript></div>
+</div></section>
 
-    <!-- ==========================================
-         AFTER SALE (PURNA JUAL)
-         ========================================== -->
-    <section id="purna-jual" class="alt">
-        <div class="w">
-            <span class="k">After Sale Support</span>
-            <h2>Layanan Purna Jual</h2>
-            <p class="mut" style="max-width:680px">Kami mengedepankan layanan purna jual yang baik dan optimal, termasuk pendampingan teknis dan pelatihan terkait barang yang kami distribusikan.</p>
-            <ul class="ls">
-                <li><svg class="i"><use href="#wr"/></svg>Pemasangan dan pengecekan peralatan</li>
-                <li><svg class="i"><use href="#cap"/></svg>Pelatihan terkait barang yang didistribusikan</li>
-                <li><svg class="i"><use href="#shd"/></svg>Dukungan purna jual yang optimal</li>
-            </ul>
-        </div>
-    </section>
+<section id="purna-jual" class="alt"><div class="w">
+<span class="k">After Sale Support</span><h2>Layanan Purna Jual</h2>
+<p class="mut" style="max-width:680px">Kami mengedepankan layanan purna jual yang baik dan optimal, termasuk pendampingan teknis dan pelatihan terkait barang yang kami distribusikan.</p>
+<ul class="ls">
+<li><svg class="i"><use href="#wr"/></svg>Pemasangan dan pengecekan peralatan</li>
+<li><svg class="i"><use href="#cap"/></svg>Pelatihan terkait barang yang didistribusikan</li>
+<li><svg class="i"><use href="#shd"/></svg>Dukungan purna jual yang optimal</li>
+</ul>
+</div></section>
 
-    <!-- ==========================================
-         LEGALITAS PERUSAHAAN
-         ========================================== -->
-    <section id="legalitas">
-        <div class="w">
-            <span class="k">The Legality of Company</span>
-            <h2>Legalitas Perusahaan</h2>
-            <p class="mut">PT. Berkah Madani Husada memiliki kelengkapan legalitas usaha berikut. Nomor dan salinan dokumen dapat diminta melalui kontak kami.</p>
-            <ul class="ls">
-                <li><svg class="i"><use href="#doc"/></svg>Nomor Pokok Wajib Pajak (NPWP)</li>
-                <li><svg class="i"><use href="#doc"/></svg>Akta Pendirian Perusahaan</li>
-                <li><svg class="i"><use href="#doc"/></svg>Nomor Induk Berusaha (NIB)</li>
-                <li><svg class="i"><use href="#doc"/></svg>Surat Izin Usaha Perdagangan (SIUP)</li>
-                <li><svg class="i"><use href="#doc"/></svg>Surat Pengukuhan Menteri Hukum dan HAM RI</li>
-                <li><svg class="i"><use href="#doc"/></svg>Surat Izin IDAK</li>
-            </ul>
-        </div>
-    </section>
+<section id="legalitas"><div class="w">
+<span class="k">The Legality of Company</span><h2>Legalitas Perusahaan</h2>
+<p class="mut">PT. Berkah Madani Husada memiliki kelengkapan legalitas usaha berikut. Nomor dan salinan dokumen dapat diminta melalui kontak kami.</p>
+<ul class="ls">
+<li><svg class="i"><use href="#doc"/></svg>Nomor Pokok Wajib Pajak (NPWP)</li>
+<li><svg class="i"><use href="#doc"/></svg>Akta Pendirian Perusahaan</li>
+<li><svg class="i"><use href="#doc"/></svg>Nomor Induk Berusaha (NIB)</li>
+<li><svg class="i"><use href="#doc"/></svg>Surat Izin Usaha Perdagangan (SIUP)</li>
+<li><svg class="i"><use href="#doc"/></svg>Surat Pengukuhan Menteri Hukum dan HAM RI</li>
+<li><svg class="i"><use href="#doc"/></svg>Surat Izin IDAK</li>
+</ul>
+</div></section>
 
-    <!-- ==========================================
-         KONTAK
-         ========================================== -->
-    <section id="kontak" class="alt">
-        <div class="w">
-            <span class="k">Kontak</span>
-            <h2>Hubungi Kami</h2>
-            <div class="ct">
-                <div class="c">
-                    <svg class="i"><use href="#pin"/></svg>
-                    <h3>Head Office</h3>
-                    <p>Jl. Slamet Riyadi No.183<br>Jember, Jawa Timur</p>
-                </div>
-                <div class="c">
-                    <svg class="i"><use href="#tel"/></svg>
-                    <h3>Telepon</h3>
-                    <p><a href="tel:+6282233795575">0822 3379 5575</a><br><a href="tel:+6281233175859">0812 3317 5859</a></p>
-                </div>
-                <div class="c">
-                    <svg class="i"><use href="#mail"/></svg>
-                    <h3>Email</h3>
-                    <p><a href="mailto:berkahmadanihusada@gmail.com">berkahmadanihusada@gmail.com</a></p>
-                </div>
-                <div class="c">
-                    <svg class="i"><use href="#ig"/></svg>
-                    <h3>Instagram</h3>
-                    <p><a href="https://www.instagram.com/pt_berkahmadanihusada/" target="_blank" rel="noopener">@pt_berkahmadanihusada</a></p>
-                </div>
-            </div>
-            <p style="margin-top:20px">
-                <a class="btn" href="https://wa.me/6282233795575">Chat WhatsApp</a>
-                <a class="btn ghost" href="https://www.instagram.com/pt_berkahmadanihusada/" target="_blank" rel="noopener">Instagram</a>
-            </p>
-        </div>
-    </section>
+<section id="kontak" class="alt"><div class="w">
+<span class="k">Kontak</span><h2>Hubungi Kami</h2>
+<div class="ct">
+<div class="c"><svg class="i"><use href="#pin"/></svg><h3>Head Office</h3><p>Jl. Slamet Riyadi No.183<br>Jember, Jawa Timur</p></div>
+<div class="c"><svg class="i"><use href="#tel"/></svg><h3>Telepon</h3><p><a href="tel:+6282233795575">0822 3379 5575</a><br><a href="tel:+6281233175859">0812 3317 5859</a></p></div>
+<div class="c"><svg class="i"><use href="#mail"/></svg><h3>Email</h3><p><a href="mailto:berkahmadanihusada@gmail.com">berkahmadanihusada@gmail.com</a></p></div>
+<div class="c"><svg class="i"><use href="#ig"/></svg><h3>Instagram</h3><p><a href="https://www.instagram.com/pt_berkahmadanihusada/" target="_blank" rel="noopener">@pt_berkahmadanihusada</a></p></div>
+</div>
+<p style="margin-top:20px"><a class="btn" href="https://wa.me/6282233795575">Chat WhatsApp</a><a class="btn ghost" href="https://www.instagram.com/pt_berkahmadanihusada/" target="_blank" rel="noopener">Instagram</a></p>
+</div></section>
 
-    <!-- ==========================================
-         FOOTER
-         ========================================== -->
-    <footer>
-        <div class="w">
-            <div class="logo"></div>
-            &copy; 2026 PT. Berkah Madani Husada &middot; Distributor Alat Kesehatan<br>
-            <a href="https://www.instagram.com/pt_berkahmadanihusada/" target="_blank" rel="noopener">Instagram @pt_berkahmadanihusada</a>
-        </div>
-    </footer>
-
-    <!-- ==========================================
-         JAVASCRIPT / LOGIKA WEB
-         ========================================== -->
-    <script src="kabar.js"></script>
-    <script>
-        (function() {
-            var BLN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-            
-            // Fungsi format tanggal
-            function tgl(t) {
-                var p = t.split('-');
-                return parseInt(p[2], 10) + ' ' + BLN[parseInt(p[1], 10) - 1] + ' ' + p[0];
-            }
-
-            var box = document.getElementById('kabar-list');
-            if (!box) return;
-
-            // Variabel untuk tombol Prev dan Next
-            var pv = document.getElementById('kabar-prev'), 
-                nx = document.getElementById('kabar-next');
-
-            // Fungsi untuk memunculkan/menyembunyikan tombol slider berdasarkan posisi scroll
-            function upd() {
-                if (!pv || !nx) return;
-                var mx = box.scrollWidth - box.clientWidth;
-                pv.hidden = box.scrollLeft <= 2; // Sembunyi kalau mentok kiri
-                nx.hidden = mx <= 2 || box.scrollLeft >= mx - 2; // Sembunyi kalau mentok kanan
-            }
-
-            // Fungsi klik untuk tombol Prev dan Next
-            if (pv && nx) {
-                pv.onclick = function() {
-                    box.scrollBy({ left: -box.clientWidth * 0.8, behavior: 'smooth' });
-                };
-                nx.onclick = function() {
-                    box.scrollBy({ left: box.clientWidth * 0.8, behavior: 'smooth' });
-                };
-                box.addEventListener('scroll', upd);
-                window.addEventListener('resize', upd);
-            }
-
-            // Fungsi memproses teks CSV
-            function csv(t) {
-                var r = [], row = [], f = '', q = false, i = 0, c;
-                for (; i < t.length; i++) {
-                    c = t[i];
-                    if (q) {
-                        if (c == '"') {
-                            if (t[i + 1] == '"') { f += '"'; i++; } else { q = false; }
-                        } else { f += c; }
-                    } else if (c == '"') { q = true; } 
-                    else if (c == ',') { row.push(f); f = ''; } 
-                    else if (c == '\n' || c == '\r') {
-                        if (c == '\r' && t[i + 1] == '\n') i++;
-                        row.push(f); r.push(row); row = []; f = '';
-                    } else { f += c; }
-                }
-                if (f !== '' || row.length) { row.push(f); r.push(row); }
-                return r;
-            }
-
-            function z(n) { return ('0' + n).slice(-2); }
-
-            function nd(s) {
-                s = (s || '').trim();
-                var m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-                if (m) return m[1] + '-' + z(m[2]) + '-' + z(m[3]);
-                m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
-                if (m) return m[3] + '-' + z(m[2]) + '-' + z(m[1]);
-                return '';
-            }
-
-            function foto(u) {
-                u = (u || '').trim();
-                if (!u) return '';
-                var m = u.match(/drive\.google\.com.*?(?:\/d\/|[?&]id=)([\w-]{15,})/);
-                if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w600';
-                return /^(https?:\/\/|images\/)/.test(u) ? u : '';
-            }
-
-            function link(u) {
-                u = (u || '').trim();
-                return /^https?:\/\//.test(u) ? u : '';
-            }
-
-            function fromRows(rows) {
-                var h = rows[0].map(function(x) { return x.trim().toLowerCase(); });
-                var out = [];
-                for (var i = 1; i < rows.length; i++) {
-                    var o = {};
-                    rows[i].forEach(function(v, j) { o[h[j]] = v; });
-                    var t = nd(o.tanggal);
-                    if (!t || !(o.judul || '').trim()) continue;
-                    if (/^(tidak|no|n|false|0|sembunyi)$/i.test((o.tampil || '').trim())) continue;
-                    out.push({
-                        tanggal: t, kategori: (o.kategori || '').trim(), judul: o.judul.trim(),
-                        isi: (o.isi || '').trim(), foto: foto(o.foto), tautan: link(o.tautan)
-                    });
-                }
-                return out;
-            }
-
-            // Fungsi merender (memasukkan data) berita ke HTML
-            function render(list) {
-                if (!list || !list.length) return;
-                
-                // Urutkan dari yang terbaru, batas sampai 30 berita
-                var data = list.slice().sort(function(a, b) { return a.tanggal < b.tanggal ? 1 : -1; }).slice(0, 30);
-                box.innerHTML = '';
-                
-                data.forEach(function(k) {
-                    var c = document.createElement('article'); c.className = 'nc';
-                    
-                    if (k.foto) {
-                        var i = document.createElement('img'); i.src = k.foto; i.alt = k.judul;
-                        i.loading = 'lazy'; i.onerror = function() { i.remove(); };
-                        c.appendChild(i);
-                    }
-                    
-                    var b = document.createElement('div'); b.className = 'b';
-                    var m = document.createElement('div'); m.className = 'm';
-                    
-                    if (k.kategori) {
-                        var t = document.createElement('span'); t.className = 't'; t.textContent = k.kategori;
-                        m.appendChild(t);
-                    }
-                    
-                    var d = document.createElement('span'); d.textContent = tgl(k.tanggal);
-                    m.appendChild(d); b.appendChild(m);
-                    
-                    var h = document.createElement('h3'); h.textContent = k.judul; b.appendChild(h);
-                    
-                    if (k.isi) {
-                        var p = document.createElement('p'); p.textContent = k.isi; b.appendChild(p);
-                    }
-                    
-                    if (k.tautan) {
-                        var a = document.createElement('a'); a.className = 'more'; a.href = k.tautan;
-                        a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Selengkapnya';
-                        b.appendChild(a);
-                    }
-                    
-                    c.appendChild(b); box.appendChild(c);
-                });
-                
-                var u = document.getElementById('kabar-upd');
-                if (u) { u.textContent = 'Diperbarui ' + tgl(data[0].tanggal); u.hidden = false; }
-                upd(); // Panggil fungsi cek tombol slider setelah render selesai
-            }
-
-            // Fungsi cadangan jika gagal fetch dari link utama
-            function cadangan() {
-                render((window.KABAR || []).map(function(k) {
-                    return { tanggal: nd(k.tanggal), kategori: k.kategori, judul: k.judul, isi: k.isi, foto: foto(k.foto), tautan: link(k.tautan) };
-                }).filter(function(k) { return k.tanggal; }));
-            }
-
-            var url = window.KABAR_SHEET_URL;
-            if (url && /^https:\/\//.test(url)) {
-                fetch(url).then(function(r) {
-                    if (!r.ok) throw 0; return r.text();
-                }).then(function(t) {
-                    var l = fromRows(csv(t.replace(/^\ufeff/, '')));
-                    if (!l.length) throw 0; render(l);
-                }).catch(cadangan);
-            } else {
-                cadangan();
-            }
-        })();
-    </script>
+<footer><div class="w"><div class="logo"></div>&copy; 2026 PT. Berkah Madani Husada &middot; Distributor Alat Kesehatan<br><a href="https://www.instagram.com/pt_berkahmadanihusada/" target="_blank" rel="noopener">Instagram @pt_berkahmadanihusada</a></div></footer>
+<script src="kabar.js"></script>
+<script>
+(function(){
+var BLN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+function tgl(t){var p=t.split('-');return parseInt(p[2],10)+' '+BLN[parseInt(p[1],10)-1]+' '+p[0]}
+var box=document.getElementById('kabar-list');
+if(!box)return;
+var pv=document.getElementById('kabar-prev'),nx=document.getElementById('kabar-next');
+function upd(){if(!pv||!nx)return;var mx=box.scrollWidth-box.clientWidth;pv.hidden=box.scrollLeft<=2;nx.hidden=mx<=2||box.scrollLeft>=mx-2}
+if(pv&&nx){pv.onclick=function(){box.scrollBy({left:-box.clientWidth*.8,behavior:'smooth'})};nx.onclick=function(){box.scrollBy({left:box.clientWidth*.8,behavior:'smooth'})};box.addEventListener('scroll',upd);window.addEventListener('resize',upd)}
+function csv(t){var r=[],row=[],f='',q=false,i=0,c;
+for(;i<t.length;i++){c=t[i];
+if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}
+else if(c=='"')q=true;
+else if(c==','){row.push(f);f=''}
+else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;row.push(f);r.push(row);row=[];f=''}
+else f+=c}
+if(f!==''||row.length){row.push(f);r.push(row)}
+return r}
+function z(n){return ('0'+n).slice(-2)}
+function nd(s){s=(s||'').trim();var m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);if(m)return m[1]+'-'+z(m[2])+'-'+z(m[3]);m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m)return m[3]+'-'+z(m[2])+'-'+z(m[1]);return ''}
+function foto(u){u=(u||'').trim();if(!u)return '';var m=u.match(/drive\.google\.com.*?(?:\/d\/|[?&]id=)([\w-]{15,})/);if(m)return 'https://drive.google.com/thumbnail?id='+m[1]+'&sz=w600';return /^(https?:\/\/|images\/)/.test(u)?u:''}
+function link(u){u=(u||'').trim();return /^https?:\/\//.test(u)?u:''}
+function fromRows(rows){var h=rows[0].map(function(x){return x.trim().toLowerCase()}),out=[],i;
+for(i=1;i<rows.length;i++){var o={};rows[i].forEach(function(v,j){o[h[j]]=v});
+var t=nd(o.tanggal);if(!t||!(o.judul||'').trim())continue;
+if(/^(tidak|no|n|false|0|sembunyi)$/i.test((o.tampil||'').trim()))continue;
+out.push({tanggal:t,kategori:(o.kategori||'').trim(),judul:o.judul.trim(),isi:(o.isi||'').trim(),foto:foto(o.foto),tautan:link(o.tautan)})}
+return out}
+function render(list){
+if(!list||!list.length)return;
+var data=list.slice().sort(function(a,b){return a.tanggal<b.tanggal?1:-1}).slice(0,30);
+box.innerHTML='';
+data.forEach(function(k){
+var c=document.createElement('article');c.className='nc';
+if(k.foto){var i=document.createElement('img');i.src=k.foto;i.alt=k.judul;i.loading='lazy';i.onerror=function(){i.remove()};c.appendChild(i)}
+var b=document.createElement('div');b.className='b';
+var m=document.createElement('div');m.className='m';
+if(k.kategori){var t=document.createElement('span');t.className='t';t.textContent=k.kategori;m.appendChild(t)}
+var d=document.createElement('span');d.textContent=tgl(k.tanggal);m.appendChild(d);b.appendChild(m);
+var h=document.createElement('h3');h.textContent=k.judul;b.appendChild(h);
+if(k.isi){var p=document.createElement('p');p.textContent=k.isi;b.appendChild(p)}
+if(k.tautan){var a=document.createElement('a');a.className='more';a.href=k.tautan;a.target='_blank';a.rel='noopener';a.textContent='Selengkapnya';b.appendChild(a)}
+c.appendChild(b);box.appendChild(c)});
+var u=document.getElementById('kabar-upd');if(u){u.textContent='Diperbarui '+tgl(data[0].tanggal);u.hidden=false}upd()}
+function cadangan(){render((window.KABAR||[]).map(function(k){return {tanggal:nd(k.tanggal),kategori:k.kategori,judul:k.judul,isi:k.isi,foto:foto(k.foto),tautan:link(k.tautan)}}).filter(function(k){return k.tanggal}))}
+var url=window.KABAR_SHEET_URL;
+if(url&&/^https:\/\//.test(url)){
+fetch(url).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){var l=fromRows(csv(t.replace(/^\ufeff/,'')));if(!l.length)throw 0;render(l)}).catch(cadangan)}
+else cadangan();
+})();
+</script>
+<script src="katalog.js"></script>
+<script>
+(function(){
+var box=document.getElementById('katalog-list');
+if(!box||!window.KATALOG||!KATALOG.length)return;
+var WA='https://wa.me/6282233795575?text=',IG='https://ig.me/m/pt_berkahmadanihusada';
+function ico(k){return '<svg class="i"><use href="#'+String(k||'ic-box').replace(/[^\w-]/g,'')+'"/></svg>'}
+box.innerHTML='';
+KATALOG.forEach(function(k){
+if(k.tampil===false)return;
+var c=document.createElement('article');c.className='pc';
+var p=document.createElement('div');p.className='pic';p.innerHTML=ico(k.ikon);
+if(k.foto&&/^(images\/|https:\/\/)/.test(k.foto)){var im=new Image();im.alt=k.nama;im.onload=function(){p.innerHTML='';p.appendChild(im)};im.src=k.foto}
+c.appendChild(p);
+var b=document.createElement('div');b.className='pb';
+var h=document.createElement('h3');h.textContent=k.nama;b.appendChild(h);
+if(k.en){var e=document.createElement('div');e.className='en';e.textContent=k.en;b.appendChild(e)}
+if(k.ket){var t=document.createElement('div');t.className='ket';t.textContent=k.ket;b.appendChild(t)}
+if(k.varian){var g=document.createElement('span');g.className='tag';g.textContent='Beberapa varian';b.appendChild(g)}
+c.appendChild(b);
+var a=document.createElement('div');a.className='act';
+var w=document.createElement('a');w.href=WA+encodeURIComponent('Halo PT. Berkah Madani Husada, saya ingin menanyakan ketersediaan dan informasi untuk: '+k.nama+'.');w.target='_blank';w.rel='noopener';w.textContent='WhatsApp';
+var i=document.createElement('a');i.href=IG;i.target='_blank';i.rel='noopener';i.textContent='Instagram';
+a.appendChild(w);a.appendChild(i);c.appendChild(a);box.appendChild(c)});
+})();
+</script>
 </body>
 </html>
-
-```
