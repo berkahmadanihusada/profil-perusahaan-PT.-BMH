@@ -33,15 +33,15 @@ window.KATALOG = [
     ket: "Kateter Short Term & Long Term",
     varian: true,
     ikon: "ic-drop",
-    foto: "HCk Set.jpg"
+    foto: "images/katalog-hemodialisis.jpg"
   },
   {
     nama: "Kateter Vena Sentral (CVC)",
     en: "Central Venous Catheters",
     ket: "Double lumen & triple lumen",
     varian: true,
-    ikon: "",
-    foto: "images/CVC.jpg"
+    ikon: "hrt",
+    foto: "images/katalog-cvc.jpg"
   },
   {
     nama: "Bedah Vaskular",
@@ -49,7 +49,7 @@ window.KATALOG = [
     ket: "",
     varian: true,
     ikon: "ic-pulse",
-    foto: "VascSurg.jpg"
+    foto: ["images/katalog-vaskular-1.jpg", "images/katalog-vaskular-2.jpg"]
   },
   {
     nama: "Bedah Toraks",
@@ -57,7 +57,7 @@ window.KATALOG = [
     ket: "",
     varian: true,
     ikon: "ic-wind",
-    foto: "RibFS.jfif"
+    foto: "images/katalog-toraks.jpg"
   },
   {
     nama: "Urologi",
@@ -65,7 +65,7 @@ window.KATALOG = [
     ket: "",
     varian: true,
     ikon: "ic-flask",
-    foto: "urolcuttingloop.jpg"
+    foto: "images/katalog-urologi.jpg"
   },
   {
     nama: "Gastroenterologi",
@@ -73,7 +73,7 @@ window.KATALOG = [
     ket: "",
     varian: false,
     ikon: "ic-search",
-    foto: "sache knife.png"
+    foto: "images/katalog-gastro.jpg"
   },
   {
     nama: "Intervensi & Drainase",
@@ -81,7 +81,7 @@ window.KATALOG = [
     ket: "",
     varian: false,
     ikon: "syr",
-    foto: "pigtaildrain.jpg"
+    foto: "images/katalog-drainase.jpg"
   },
   {
     nama: "Produk Habis Pakai & Penunjang",
@@ -89,6 +89,6 @@ window.KATALOG = [
     ket: "",
     varian: true,
     ikon: "ic-box",
-    foto: "citralock.jpg"
+    foto: ""
   }
 ];
