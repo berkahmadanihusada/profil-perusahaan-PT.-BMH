@@ -35,5 +35,5 @@ window.KATALOG = [
   { nama: "Urologi", en: "Urology", ket: "", varian: true, ikon: "ic-flask", foto: "images/katalog-urologi.jpg" },
   { nama: "Gastroenterologi", en: "Gastroenterology", ket: "", varian: false, ikon: "ic-search", foto: "images/katalog-gastro.jpg" },
   { nama: "Intervensi & Drainase", en: "Interventional & Drainage", ket: "", varian: false, ikon: "syr", foto: "images/katalog-drainase.jpg" },
-  { nama: "Produk Habis Pakai & Penunjang", en: "Consumables & Support Products", ket: "", varian: true, ikon: "ic-box", foto: "" }
+  { nama: "Produk Habis Pakai & Penunjang", en: "Consumables & Support Products", ket: "", varian: true, ikon: "ic-box", foto: "images/C-lock.jpg" }
 ];
