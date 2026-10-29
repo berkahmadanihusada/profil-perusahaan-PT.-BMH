@@ -13,6 +13,8 @@
     ikon   : ikon sementara jika foto belum ada. Pilihan:
              ic-drop, hrt, ic-pulse, ic-wind, ic-flask, ic-search, syr, ic-box
     foto   : alamat foto, contoh "images/katalog-hemodialisis.jpg"
+             Untuk BEBERAPA foto di satu kartu, pakai tanda kurung siku:
+             ["images/foto-1.jpg", "images/foto-2.jpg"]  (foto bisa digeser dengan panah)
              (kosongkan "" kalau belum ada foto; kartu akan memakai ikon)
     tampil : false = sembunyikan kartu ini tanpa menghapusnya (boleh dihapus barisnya)
 
@@ -25,70 +27,13 @@
   JANGAN menaruh data stok, harga, atau angka internal lain di file ini (file ini terbuka untuk umum).
   ============================================================
 */
-
 window.KATALOG = [
-  {
-    nama: "Produk Hemodialisis",
-    en: "Hemodialysis Products",
-    ket: "Kateter Short Term & Long Term",
-    varian: true,
-    ikon: "ic-drop",
-    foto: "images/katalog-hemodialisis.jpg"
-  },
-  {
-    nama: "Kateter Vena Sentral (CVC)",
-    en: "Central Venous Catheters",
-    ket: "Double lumen & triple lumen",
-    varian: true,
-    ikon: "hrt",
-    foto: "images/katalog-cvc.jpg"
-  },
-  {
-    nama: "Bedah Vaskular",
-    en: "Vascular Surgery",
-    ket: "",
-    varian: true,
-    ikon: "ic-pulse",
-    foto: ["images/katalog-vaskular-1.jpg", "images/katalog-vaskular-2.jpg"]
-  },
-  {
-    nama: "Bedah Toraks",
-    en: "Thoracic Surgery",
-    ket: "",
-    varian: true,
-    ikon: "ic-wind",
-    foto: "images/katalog-toraks.jpg"
-  },
-  {
-    nama: "Urologi",
-    en: "Urology",
-    ket: "",
-    varian: true,
-    ikon: "ic-flask",
-    foto: "images/katalog-urologi.jpg"
-  },
-  {
-    nama: "Gastroenterologi",
-    en: "Gastroenterology",
-    ket: "",
-    varian: false,
-    ikon: "ic-search",
-    foto: "images/katalog-gastro.jpg"
-  },
-  {
-    nama: "Intervensi & Drainase",
-    en: "Interventional & Drainage",
-    ket: "",
-    varian: false,
-    ikon: "syr",
-    foto: "images/katalog-drainase.jpg"
-  },
-  {
-    nama: "Produk Habis Pakai & Penunjang",
-    en: "Consumables & Support Products",
-    ket: "",
-    varian: true,
-    ikon: "ic-box",
-    foto: ""
-  }
+  { nama: "Produk Hemodialisis", en: "Hemodialysis Products", ket: "Kateter Short Term & Long Term", varian: true, ikon: "ic-drop", foto: "images/katalog-hemodialisis.jpg" },
+  { nama: "Kateter Vena Sentral (CVC)", en: "Central Venous Catheters", ket: "Double lumen & triple lumen", varian: true, ikon: "hrt", foto: "images/katalog-cvc.jpg" },
+  { nama: "Bedah Vaskular", en: "Vascular Surgery", ket: "", varian: true, ikon: "ic-pulse", foto: ["images/katalog-vaskular-1.jpg", "images/katalog-vaskular-2.jpg"] },
+  { nama: "Bedah Toraks", en: "Thoracic Surgery", ket: "", varian: true, ikon: "ic-wind", foto: "images/katalog-toraks.jpg" },
+  { nama: "Urologi", en: "Urology", ket: "", varian: true, ikon: "ic-flask", foto: "images/katalog-urologi.jpg" },
+  { nama: "Gastroenterologi", en: "Gastroenterology", ket: "", varian: false, ikon: "ic-search", foto: "images/katalog-gastro.jpg" },
+  { nama: "Intervensi & Drainase", en: "Interventional & Drainage", ket: "", varian: false, ikon: "syr", foto: "images/katalog-drainase.jpg" },
+  { nama: "Produk Habis Pakai & Penunjang", en: "Consumables & Support Products", ket: "", varian: true, ikon: "ic-box", foto: "" }
 ];
