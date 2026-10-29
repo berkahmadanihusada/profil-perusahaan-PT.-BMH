@@ -41,7 +41,7 @@ window.KATALOG = [
     ket: "Double lumen & triple lumen",
     varian: true,
     ikon: "",
-    foto: "images-CVC.jpg"
+    foto: "images/CVC.jpg"
   },
   {
     nama: "Bedah Vaskular",
